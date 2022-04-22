@@ -7,14 +7,14 @@ workflows:
   test:
     jobs:
       - unity/test:
-          unity-license-var-name: "ACTIVATION_ULF_ENC_2020"
-          tag: "2020.1.0f1-linux-il2cpp-1"
+          unity-license-var-name: "ACTIVATION_ULF_ENC"
+          tag: "2021.3.0f1-linux-il2cpp-1"
           project-path: "src"
           test-platform: "playmode"
       - unity/build:
-          unity-license-var-name: "ACTIVATION_ULF_ENC_2020"
+          unity-license-var-name: "ACTIVATION_ULF_ENC"
           os: "ubuntu"
           target-platform: "linux-il2cpp"
-          editor-version: "2020.1.0f1"
+          editor-version: "2021.3.0f1"
           project-path: "src"
           build-target: StandaloneLinux64
