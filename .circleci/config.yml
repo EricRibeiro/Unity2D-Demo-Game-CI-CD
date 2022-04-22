@@ -13,6 +13,8 @@ workflows:
           test-platform: "playmode"
       - unity/build:
           unity-license-var-name: "ACTIVATION_ULF_ENC_2020"
-          tag: "2020.1.0f1-linux-il2cpp-1"
+          os: "ubuntu"
+          target-platform: "linux-il2cpp"
+          editor-version: "2020.1.0f1"
           project-path: "src"
           build-target: StandaloneLinux64
