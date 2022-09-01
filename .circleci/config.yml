@@ -1,20 +1,38 @@
 version: 2.1
 
 orbs:
-  unity: ericribeiro/unity@dev:alpha
+  unity: game-ci/unity@1.1.0
+
+jobs:
+  build-windows:
+    executor:
+      name: unity/ubuntu
+      editor_version: 2021.3.8f1
+      resource_class: large
+      target_platform: windows-mono
+    steps:
+      - checkout
+      - unity/prepare-env:
+          project-path: "src"
+          unity-license-var-name: "UNITY_ENCODED_LICENSE_2021"
+      - unity/build:
+          build-name: "MyBuild"
+          build-target: StandaloneWindows64
+          project-path: "src"
+      - unity/return-license
 
 workflows:
-  test:
+  build-unity-project:
     jobs:
-      - unity/test:
-          unity-license-var-name: "ACTIVATION_ULF_ENC"
-          tag: "2021.3.0f1-linux-il2cpp-1"
-          project-path: "src"
-          test-platform: "playmode"
+      - build-windows:
+          context: orb-testing-unity
       - unity/build:
-          unity-license-var-name: "ACTIVATION_ULF_ENC"
-          os: "ubuntu"
-          target-platform: "linux-il2cpp"
-          editor-version: "2021.3.0f1"
+          build-target: StandaloneWindows64
+          context: orb-testing-unity
           project-path: "src"
-          build-target: StandaloneLinux64
+          unity-license-var-name: "UNITY_ENCODED_LICENSE_2021"
+          executor:
+            name: unity/ubuntu
+            editor_version: 2021.3.8f1
+            resource_class: large
+            target_platform: windows-mono
