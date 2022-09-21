@@ -163,6 +163,15 @@ static class MyCustomBuildCommand
 
     static void MyCustomBuildMethod()
     {
+        string customParam1 = GetArgument("customParam1");
+        Console.WriteLine($":: The first custom parameter is: '{customParam1}'");
+
+        string customParam2 = GetArgument("customParam2");
+        Console.WriteLine($":: The second custom parameter is: '{customParam2}'");
+
+        string customParam3 = GetArgument("customParam3");
+        Console.WriteLine($":: The third custom parameter is: '{customParam3}'");
+
         var buildTarget = GetBuildTarget();
 
         Console.WriteLine(":: Performing build");
