@@ -10,7 +10,7 @@ workflows:
       - unity/build:
           name: "build-Windows64-il2cpp-cloud"
           step-name: "Build StandaloneWindows64 il2cpp"
-          unity-license-var-name: "UNITY_ENCODED_LICENSE"
+          unity-license-var-name: "UNITY_ENCODED_LICENSE_2021"
           unity-username-var-name: "UNITY_USERNAME"
           unity-password-var-name: "UNITY_PASSWORD"
           executor:
@@ -25,7 +25,7 @@ workflows:
       - unity/build:
           name: "build-Windows64-il2cpp-runner"
           step-name: "Build StandaloneWindows64 il2cpp"
-          unity-license-var-name: "UNITY_ENCODED_LICENSE"
+          unity-license-var-name: "UNITY_ENCODED_LICENSE_2021"
           unity-username-var-name: "UNITY_USERNAME"
           unity-password-var-name: "UNITY_PASSWORD"
           executor:
