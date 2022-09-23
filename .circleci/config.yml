@@ -1,20 +1,39 @@
 version: 2.1
 
 orbs:
-  unity: ericribeiro/unity@dev:alpha
+  unity: game-ci/unity@1.1.0
 
 workflows:
-  test:
+  build-unity-project:
     jobs:
-      - unity/test:
-          unity-license-var-name: "ACTIVATION_ULF_ENC"
-          tag: "2021.3.0f1-linux-il2cpp-1"
-          project-path: "src"
-          test-platform: "playmode"
+      # Build for several platforms using IL2CPP for the scripting backend
       - unity/build:
-          unity-license-var-name: "ACTIVATION_ULF_ENC"
-          os: "ubuntu"
-          target-platform: "linux-il2cpp"
-          editor-version: "2021.3.0f1"
+          name: "build-Windows64-il2cpp-cloud"
+          step-name: "Build StandaloneWindows64 il2cpp"
+          unity-license-var-name: "UNITY_ENCODED_LICENSE"
+          unity-username-var-name: "UNITY_USERNAME"
+          unity-password-var-name: "UNITY_PASSWORD"
+          executor:
+            name: "unity/windows-2019"
+            size: "large"
+            editor_version: "2021.3.2f1"
+            target_platform: "windows-il2cpp"
           project-path: "src"
-          build-target: StandaloneLinux64
+          build-target: StandaloneWindows64
+          compress: true
+          context: cpe-unity
+      - unity/build:
+          name: "build-Windows64-il2cpp-runner"
+          step-name: "Build StandaloneWindows64 il2cpp"
+          unity-license-var-name: "UNITY_ENCODED_LICENSE"
+          unity-username-var-name: "UNITY_USERNAME"
+          unity-password-var-name: "UNITY_PASSWORD"
+          executor:
+            name: "unity/windows-runner"
+            resource_class: "ericribeiro/unity-runner"
+            editor_version: "2021.3.2f1"
+            target_platform: "windows-il2cpp"
+          project-path: "src"
+          build-target: StandaloneWindows64
+          compress: true
+          context: cpe-unity
